@@ -1,15 +1,16 @@
+
 'use client';
 
 import { motion, useInView } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
-import { Button } from '@/components/ui/button';
+//import { Button } from '@/components/ui/button';
 import { ArrowRight, Award, Users, Briefcase } from 'lucide-react';
 import Image from 'next/image';
 import author from '@/assets/3.png';
 import Link from 'next/link';
 
 // ✅ Simple count-up animation
-function CountUp({ end, duration = 2 }) {
+function CountUp({ end, duration = 2 }: { end: number; duration?: number }) {
   const [count, setCount] = useState(0);
   const ref = useRef(null);
   const inView = useInView(ref, { once: true });

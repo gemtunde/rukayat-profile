@@ -2,7 +2,7 @@ import { AuthorMessage } from "@/components/BookComponent/author-message";
 import { Bonuses } from "@/components/BookComponent/bonuses";
 import BookExcerpt from "@/components/BookComponent/BookExcerpt";
 import { Contact } from "@/components/BookComponent/contact";
-import { Excerpt } from "@/components/BookComponent/excerpt";
+//import { Excerpt } from "@/components/BookComponent/excerpt";
 import { FAQ } from "@/components/BookComponent/faq";
 import { HeroBook } from "@/components/BookComponent/hero-book";
 import { Testimonials } from "@/components/BookComponent/testimonials";

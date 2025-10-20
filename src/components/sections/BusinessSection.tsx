@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Button } from '@/components/ui/button';
 import { ArrowRight, Award, Users, Briefcase } from 'lucide-react';
 import Image from 'next/image';
 import profile from '@/assets/2.png'; // ✅ ensure this path is correct

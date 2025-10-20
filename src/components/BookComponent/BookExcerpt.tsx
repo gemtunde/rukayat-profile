@@ -1,15 +1,14 @@
 'use client';
 
 import { useRef, useState } from 'react';
-import HTMLFlipBook from 'react-pageflip';
+import HTMLFlipBook, { type HTMLFlipBookType } from 'react-pageflip';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 
 export default function BookExcerpt() {
-  const bookRef = useRef<any>(null);
+  const bookRef = useRef<HTMLFlipBookType | null>(null);
   const [isOpen, setIsOpen] = useState(false);
-  const [page, setPage] = useState(0);
 
   const nextPage = () => bookRef.current?.pageFlip().flipNext();
   const prevPage = () => bookRef.current?.pageFlip().flipPrev();
@@ -23,7 +22,6 @@ export default function BookExcerpt() {
 
   return (
     <section className="py-16 sm:py-20 bg-slate-100 flex flex-col items-center justify-center">
-      {/* === Section heading === */}
       <motion.h2
         initial={{ y: 20, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
@@ -34,7 +32,6 @@ export default function BookExcerpt() {
         Read an Excerpt
       </motion.h2>
 
-      {/* === Flipbook container (centered) === */}
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         whileInView={{ opacity: 1, scale: 1 }}
@@ -47,25 +44,21 @@ export default function BookExcerpt() {
         <div className="flex items-center justify-center w-[90vw] max-w-[600px]">
           <HTMLFlipBook
             ref={bookRef}
-            {...({
-              width: 400,
-              height: 550,
-              size: 'stretch', // ✅ makes it responsive
-              minWidth: 250,
-              maxWidth: 600,
-              minHeight: 350,
-              maxHeight: 800,
-              drawShadow: true,
-              flippingTime: 1000,
-              usePortrait: false,
-              showCover: true,
-              mobileScrollSupport: true,
-              className:
-                'rounded-xl overflow-hidden bg-[#f8f5f0] mx-auto shadow-xl',
-            } as any)}
-            onFlip={(e: any) => setPage(e.data)}
+            width={400}
+            height={550}
+            size="stretch"
+            minWidth={250}
+            maxWidth={600}
+            minHeight={350}
+            maxHeight={800}
+            drawShadow
+            flippingTime={1000}
+            usePortrait={false}
+            showCover
+            mobileScrollSupport
+            className="rounded-xl overflow-hidden bg-[#f8f5f0] mx-auto shadow-xl"
           >
-            {/* === FRONT COVER === */}
+            {/* FRONT COVER */}
             <div
               className="relative w-full h-full cursor-pointer"
               onClick={handleCoverClick}
@@ -87,7 +80,7 @@ export default function BookExcerpt() {
               )}
             </div>
 
-            {/* === INSIDE PAGES === */}
+            {/* INSIDE PAGES */}
             {[1, 2, 3].map((num) => (
               <div key={num} className="relative w-full h-full">
                 <Image
@@ -100,7 +93,7 @@ export default function BookExcerpt() {
               </div>
             ))}
 
-            {/* === BACK COVER === */}
+            {/* BACK COVER */}
             <div className="relative w-full h-full" data-density="hard">
               <Image
                 src="/excerpts/hero-bg.png"
@@ -112,7 +105,7 @@ export default function BookExcerpt() {
           </HTMLFlipBook>
         </div>
 
-        {/* === Navigation Controls === */}
+        {/* NAVIGATION BUTTONS */}
         {isOpen && (
           <>
             <button
@@ -121,7 +114,6 @@ export default function BookExcerpt() {
             >
               <ArrowLeft className="w-5 h-5" />
             </button>
-
             <button
               onClick={nextPage}
               className="absolute right-3 sm:-right-12 top-1/2 transform -translate-y-1/2 bg-amber-600 text-white p-2 sm:p-3 rounded-full shadow-md hover:bg-amber-500 transition"
@@ -132,7 +124,7 @@ export default function BookExcerpt() {
         )}
       </motion.div>
 
-      {/* === CTA === */}
+      {/* DOWNLOAD BUTTON */}
       <motion.div
         initial={{ y: 20, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
@@ -140,13 +132,13 @@ export default function BookExcerpt() {
         viewport={{ once: true }}
         className="mt-8 sm:mt-10 text-center"
       >
-      <a
-  href="/files/Limitless_Excerpt.pdf"
-  download="Limitless_Excerpt.pdf"
-  className="bg-amber-600 text-white font-semibold px-8 py-3 rounded-lg shadow-md hover:bg-amber-500 transition"
->
-  Download Excerpt
-</a>
+        <a
+          href="/files/Limitless_Excerpt.pdf"
+          download="Limitless_Excerpt.pdf"
+          className="bg-amber-600 text-white font-semibold px-8 py-3 rounded-lg shadow-md hover:bg-amber-500 transition"
+        >
+          Download Excerpt
+        </a>
       </motion.div>
     </section>
   );
